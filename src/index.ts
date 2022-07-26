@@ -17,21 +17,27 @@ interface ConfigureParams {
 
 export default async function bootstrap({ app: server, prefix, render }: ConfigureParams) {
   const app = await NestFactory.create(AppModule, new ExpressAdapter(server));
+
   app.setGlobalPrefix(prefix);
   app.useGlobalFilters({
     async catch(exception, host) {
       const ctx = host.switchToHttp();
       const status = exception.getStatus() as number;
-      const next = ctx.getNext();
+      const response = ctx.getResponse();
+      const exceptionResponse = exception?.response;
+
       if (status === 404 && render) {
+        // Показываем юзеру страницу 404
         const req = ctx.getRequest<Request>();
         const res = ctx.getResponse<Response>();
         await render({ req, res });
       } else {
-        next();
+        // Отправляем сообщение об ошибке (например, при неудачном запросе)
+        return response.status(status).send(exceptionResponse);
       }
     },
   });
+
   const config = new DocumentBuilder()
     .setTitle('Quasar Nest example')
     .setDescription('The cats API description')
@@ -40,5 +46,6 @@ export default async function bootstrap({ app: server, prefix, render }: Configu
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup(`${prefix}/docs`, app, document);
+
   return app;
 }
