@@ -78,21 +78,5 @@
     "node": "^18 || ^16 || ^14.19",
     "npm": ">= 6.13.4",
     "yarn": ">= 1.21.1"
-  },
-  "gitHooks": {
-    "commit-msg": "commitlint -e -V",
-    "pre-commit": "lint-staged",
-    "pre-push": "lint-staged"
-  },
-  "lint-staged": {
-    "*.{vue,js,ts,jsx,tsx}": "eslint --fix",
-    "*.{vue,js,ts,jsx,tsx,css,sass,scss}": "prettier --write"
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged",
-      "pre-push": "lint-staged"
-    }
   }
 }
