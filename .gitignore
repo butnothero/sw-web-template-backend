@@ -1,18 +1,40 @@
-# compiled output
-/dist
-/node_modules
+.DS_Store
+.thumbs.db
+node_modules
 
-# Logs
-logs
-*.log
+# Quasar core related directories
+.quasar
+/dist
+
+# Cordova related directories and files
+/src-cordova/node_modules
+/src-cordova/platforms
+/src-cordova/plugins
+/src-cordova/www
+
+# Capacitor related directories and files
+/src-capacitor/www
+/src-capacitor/node_modules
+
+# BEX related directories and files
+/src-bex/www
+/src-bex/js/core
+
+# Log files
 npm-debug.log*
-pnpm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 lerna-debug.log*
+logs
+*.log
 
-# OS
-.DS_Store
+# Editor directories and files
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
 
 # Tests
 /coverage
@@ -33,3 +55,11 @@ lerna-debug.log*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+# Auto generate
+auto-imports.d.ts
+components.d.ts
+
+# Yarn
+.pnp.*
+.yarn/*
