@@ -2,6 +2,7 @@ import { Express, Request, Response } from 'express';
 import { NestFactory } from '@nestjs/core';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import * as cookieParser from 'cookie-parser';
 import { AppModule } from './app.module';
 
 interface RenderParams {
@@ -19,6 +20,7 @@ export default async function bootstrap({ app: server, prefix, render }: Configu
   const app = await NestFactory.create(AppModule, new ExpressAdapter(server));
 
   app.setGlobalPrefix(prefix);
+  app.use(cookieParser());
   app.useGlobalFilters({
     async catch(exception, host) {
       const ctx = host.switchToHttp();

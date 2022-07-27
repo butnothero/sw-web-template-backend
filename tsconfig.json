@@ -17,5 +17,11 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false
-  }
+  },
+  "types": [
+    "node"
+  ],
+  "typeRoots": [
+    "node_modules/@types"
+  ]
 }
